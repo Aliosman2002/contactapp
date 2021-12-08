@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:contactapp/contact_page.dart';
 import 'package:flutter/material.dart';
 
@@ -22,6 +24,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List myContacts = listOfContacts;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -43,7 +46,7 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: ListView.builder(
-          itemCount: 10,
+          itemCount: myContacts.length,
           itemBuilder: (BuildContext context, index) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +57,7 @@ class HomePage extends StatelessWidget {
                     child: TextField(
                         decoration: InputDecoration(
                             prefixIcon: Icon(Icons.search),
-                            hintText: "Search by name or number",
+                            hintText: "Enter number/name to search",
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                             ))),
@@ -73,18 +76,22 @@ class HomePage extends StatelessWidget {
                   ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ContactPage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ContactPage(
+                                  mycontact: myContacts[index],
+                                )));
                   },
-                  child: const ListTile(
+                  child: ListTile(
                     leading: CircleAvatar(
-                      backgroundImage: AssetImage("images/lady.jpg"),
+                      backgroundImage: NetworkImage(myContacts[index]["image"]),
                     ),
                     title: Text(
-                      "Techries Ghana",
+                      myContacts[index]["name"],
                       style: TextStyle(fontWeight: FontWeight.w800),
                     ),
-                    subtitle: Text("+233 505 419 44"),
+                    subtitle: Text(myContacts[index]["phone"]),
                     trailing: Icon(Icons.more_horiz),
                   ),
                 ),
@@ -106,3 +113,86 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
+List listOfContacts = [
+  {
+    "name": "Maryam Uthman",
+    "location": "Bangtara",
+    "email": "maryam@gmail.com",
+    "phone": "0579387456",
+    "group": "Family",
+    "image": "https://picsum.photos/200/300?random=40"
+  },
+  {
+    "name": "Zainab Uthman",
+    "location": "Bamaahuu",
+    "email": "zainab@gmail.com",
+    "phone": "0547389034",
+    "group": "A4 group",
+    "image": "https://picsum.photos/200/300?random=30"
+  },
+  {
+    "name": "Fatima",
+    "location": "USA",
+    "email": "fatima@gmail.com",
+    "phone": "0265894572",
+    "group": "GMSA UCC",
+    "image": "https://picsum.photos/200/300?random=50"
+  },
+  {
+    "name": "Firdaus",
+    "location": "SAUDI",
+    "email": "firdaus@gmail.com",
+    "phone": "0598356721",
+    "group": "ECO 104",
+    "image": "https://picsum.photos/200/300?random=55"
+  },
+  {
+    "name": "Rashida",
+    "location": "Niger",
+    "email": "rashida@gmail.com",
+    "phone": "0508936745",
+    "group": "LAR 104",
+    "image": "https://picsum.photos/200/300?random=11"
+  },
+  {
+    "name": "Abu Bakr Uthman",
+    "location": "Danku",
+    "email": "abu bakr@gmail.com",
+    "phone": "0248754309",
+    "group": "CAMSA Freshers",
+    "image": "https://picsum.photos/200/300?random=67"
+  },
+  {
+    "name": "Khaajar",
+    "location": "Fonsi",
+    "email": "khaajar@gmail.com",
+    "phone": "0549817707",
+    "group": "The family of Uthman",
+    "image": "https://picsum.photos/200/300?random=60"
+  },
+  {
+    "name": "Khadiijah",
+    "location": "Wa",
+    "email": "khadiijah@gmail.com",
+    "phone": "0505073263",
+    "group": "YTH group",
+    "image": "https://picsum.photos/200/300?random=12"
+  },
+  {
+    "name": "My sweet Mummy",
+    "location": "Niamey",
+    "email": "mylife@gmail.com",
+    "phone": "0247388348",
+    "group": "Jihaad group",
+    "image": "https://picsum.photos/200/300?random=21"
+  },
+  {
+    "name": "Prince Ali",
+    "location": "Gariel",
+    "email": "alioosamn2002@gmail.com",
+    "phone": "0241083770",
+    "group": "Family",
+    "image": "https://picsum.photos/200/300?random=39"
+  },
+];

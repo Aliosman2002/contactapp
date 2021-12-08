@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ContactPage extends StatelessWidget {
-  const ContactPage({Key? key}) : super(key: key);
+  const ContactPage({Key? key, required this.mycontact}) : super(key: key);
+  final mycontact;
 
   @override
   Widget build(BuildContext context) {
@@ -23,22 +24,22 @@ class ContactPage extends StatelessWidget {
             shadowColor: Colors.black,
             margin: const EdgeInsets.all(0),
             child: Column(
-              children: const [
+              children: [
                 SizedBox(
                   height: 20,
                 ),
                 CircleAvatar(
                   radius: 50,
-                  backgroundImage: AssetImage("images/woman.jpg"),
+                  backgroundImage: NetworkImage(mycontact["image"]),
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 Text(
-                  "Fosu Kelvin",
+                  mycontact["name"],
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                Text("Tumu, Nabulo"),
+                Text(mycontact["location"]),
                 SizedBox(
                   height: 20,
                 ),
@@ -61,14 +62,14 @@ class ContactPage extends StatelessWidget {
                   children: [
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           Text(
                             "Mobile",
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            "+233 505 419 444",
+                            mycontact["phone"],
                             style: TextStyle(color: Colors.grey),
                           ),
                         ]),
@@ -95,14 +96,14 @@ class ContactPage extends StatelessWidget {
                   children: [
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           Text(
                             "Email",
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            "bayorwor60@gmail.com",
+                            mycontact["email"],
                             style: TextStyle(color: Colors.grey),
                           ),
                         ]),
